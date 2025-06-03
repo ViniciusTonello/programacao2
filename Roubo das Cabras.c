@@ -1,24 +1,31 @@
 #include <stdio.h>
 
+#define MAX_ESTRELAS 1000000
+
+long long int carneiros[MAX_ESTRELAS];
+int atacadas[MAX_ESTRELAS];
+
 int main() {
     int N;
 
-    printf("Digite o número de estrelas: ");
+    printf("Digite o número de estrelas (máx %d): ", MAX_ESTRELAS);
     scanf("%d", &N);
 
-    int carneiros[10];
-    int atacadas[10];
+    if (N > MAX_ESTRELAS) {
+        printf("Número de estrelas excede o limite permitido.\n");
+        return 1;
+    }
 
     for (int i = 0; i < N; i++) {
         printf("Digite a quantidade de carneiros na Estrela %d: ", i + 1);
-        scanf("%d", &carneiros[i]);
+        scanf("%lld", &carneiros[i]);
         atacadas[i] = 0;
     }
 
     int pos = 0;
 
     while (pos >= 0 && pos < N) {
-        int atual = carneiros[pos];
+        long long int atual = carneiros[pos];
 
         if (carneiros[pos] > 0) {
             carneiros[pos]--;
@@ -36,7 +43,7 @@ int main() {
     }
 
     int estrelasAtacadas = 0;
-    int carneirosRestantes = 0;
+    long long int carneirosRestantes = 0;
 
     for (int i = 0; i < N; i++) {
         if (atacadas[i] == 1) {
@@ -46,7 +53,7 @@ int main() {
     }
 
     printf("\nEstrelas atacadas: %d\n", estrelasAtacadas);
-    printf("Carneiros restantes: %d\n", carneirosRestantes);
+    printf("Carneiros restantes: %lld\n", carneirosRestantes);
 
     return 0;
 }
